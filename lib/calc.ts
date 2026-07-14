@@ -1,0 +1,4 @@
+import type {LectureRecord,Stats} from '@/types';
+const counted=(r:LectureRecord)=>r.status==='present'||r.status==='absent';
+export function stats(records:LectureRecord[],required:number):Stats{const total=records.filter(counted).length;const attended=records.filter(r=>r.status==='present').length;const percent=total?attended/total*100:100;let canMiss=0;while(total+canMiss+1>0&&attended/(total+canMiss+1)*100>=required)canMiss++;let needAttend=0;while((attended+needAttend)/(total+needAttend||1)*100<required)needAttend++;const status=percent>=required?'Safe':percent>=required-10?'Warning':'Critical';return{attended,total,percent,required,status,canMiss,needAttend,afterAttend:(attended+1)/(total+1)*100,afterMiss:attended/(total+1)*100}}
+export const pct=(n:number)=>`${Math.round(n*10)/10}%`;

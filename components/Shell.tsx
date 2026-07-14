@@ -1,0 +1,2 @@
+'use client';import {Nav} from './Nav';import {useData} from '@/lib/store';import {Setup} from './Setup';
+export function Shell({children}:{children:(ctx:ReturnType<typeof useData>)=>React.ReactNode}){const ctx=useData();if(!ctx.ready)return <main className="p-6">Loading…</main>;return <><Nav/><main className="mx-auto max-w-6xl p-4 md:p-6">{ctx.data.setupComplete?children(ctx):<Setup {...ctx}/>}</main></>}
