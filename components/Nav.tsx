@@ -1,0 +1,3 @@
+'use client';import Link from 'next/link';import {usePathname} from 'next/navigation';
+const links=['/','/timetable','/calendar','/history','/settings'];
+export function Nav(){const p=usePathname();return <nav className="sticky top-0 z-10 border-b border-[#30363d] bg-[#0d1117]/95"><div className="mx-auto flex max-w-6xl items-center justify-between p-4"><b>Attendance</b><div className="flex gap-2 overflow-x-auto">{links.map(l=><Link className={`rounded-lg px-3 py-2 text-sm ${p===l?'bg-[#238636]':'hover:bg-[#21262d]'}`} key={l} href={l}>{l==='/'?'Dashboard':l.slice(1)[0].toUpperCase()+l.slice(2)}</Link>)}</div></div></nav>}
